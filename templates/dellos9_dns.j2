@@ -6,6 +6,7 @@ Configure DNS commands for dellos9 devices
 
 dellos_dns:
    domain_lookup: true
+   domain_name: dns.search.name
    name_server:
      - ip:
         - 3.1.1.1
@@ -13,9 +14,9 @@ dellos_dns:
        vrf:
         - test
         - test1
-     - vrf:        
+     - vrf:
         - test1
-       state: absent        
+       state: absent
      - ip:
         - 2.2.2.2
      - ip:
@@ -31,7 +32,7 @@ dellos_dns:
         - dname4
      - name:
         - dname5
-        - dname6             
+        - dname6
        state: absent
      - name:
         - dname7
@@ -47,50 +48,55 @@ dellos_dns:
 	{% elif dellos_dns.domain_lookup is defined and dellos_dns.domain_lookup == false %}
 	no ip domain-lookup
 	{% endif %}
-	{% if (dellos_dns.name_server is defined and dellos_dns.name_server) %}	
+  {% if dellos_dns.domain_name is defined and dellos_dns.domain_name %}
+  ip domain-name {{ dellos_dns.domain_name }}
+  {% elif dellos_dns.domain_name is defined and dellos_dns.domain_name %}
+  no ip domain-name {{ dellos_dns.domain_name }}
+  {% endif %}
+	{% if (dellos_dns.name_server is defined and dellos_dns.name_server) %}
 		{% for name_server in dellos_dns.name_server %}
 			{% set absent = "" %}
 			{% if name_server.state is defined and name_server.state == "absent" %}
 			{% set absent = "no " %}
 			{% endif %}
-			
+
 			{% set vrf_name_list = name_server.vrf %}
 			{% if (vrf_name_list is defined and vrf_name_list ) %}
 				{% for vrf_name in vrf_name_list %}
 					{% set ip_list = name_server.ip %}
 					{% if (ip_list is defined and ip_list ) %}
-						{% for ip_val in ip_list %}					
+						{% for ip_val in ip_list %}
 							{{ absent }}ip name-server vrf {{ vrf_name }} {{ ip_val }}
 						{% endfor %}
 					{% elif  name_server.state is defined and name_server.state == "absent"%}
-						{{ absent }}ip name-server vrf {{ vrf_name }}					
+						{{ absent }}ip name-server vrf {{ vrf_name }}
 					{% endif %}
 				{% endfor %}
 			{% else %}
 				{% set ip_list = name_server.ip %}
 				{% if (ip_list is defined and ip_list ) %}
-					{% for ip_val in ip_list %}					
+					{% for ip_val in ip_list %}
 						{{ absent }}ip name-server {{ ip_val }}
-					{% endfor %}					
+					{% endfor %}
 				{% endif %}
-			{% endif %}		
+			{% endif %}
 		{% endfor %}
 	{% endif %}
-	{% if (dellos_dns.domain_list is defined and dellos_dns.domain_list) %}		
+	{% if (dellos_dns.domain_list is defined and dellos_dns.domain_list) %}
 		{% for domain in dellos_dns.domain_list %}
 			{% set absent = "" %}
 			{% if domain.state is defined and domain.state == "absent" %}
 			{% set absent = "no " %}
 			{% endif %}
-			
+
 			{% set vrf_name_list = domain.vrf %}
 			{% if (vrf_name_list is defined and vrf_name_list ) %}
 				{% for vrf_name in vrf_name_list %}
 					{% set name_list = domain.name %}
 					{% if (name_list is defined and name_list ) %}
-						{% for name_val in name_list %}					
+						{% for name_val in name_list %}
 							{{ absent }}ip domain-list vrf {{ vrf_name }} {{ name_val }}
-						{% endfor %}					
+						{% endfor %}
 					{% elif  domain.state is defined and domain.state == "absent"%}
 						{{ absent }}ip domain-list vrf {{ vrf_name }}
 					{% endif %}
@@ -98,11 +104,11 @@ dellos_dns:
 			{% else %}
 				{% set name_list = domain.name %}
 				{% if (name_list is defined and name_list ) %}
-					{% for name_val in name_list %}					
+					{% for name_val in name_list %}
 						{{ absent }}ip domain-list {{ name_val }}
-					{% endfor %}					
+					{% endfor %}
 				{% endif %}
-			{% endif %}		
+			{% endif %}
 		{% endfor %}
 	{% endif %}
 {% endif %}
