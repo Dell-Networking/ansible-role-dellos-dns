@@ -21,13 +21,13 @@ Role variables
 
 | Key        | Type                      | Description                                             | Support               |
 |------------|---------------------------|---------------------------------------------------------|-----------------------|
-| ``name_server`` | list | Configures DNS (see ``name_server.*``) | dellos9 |
+| ``name_server`` | list | Configures DNS (see ``name_server.*``) | dellos9, dellos10 |
 | ``name_server.domain_lookup`` | boolean | Enables or disables domain name lookup   | dellos9 |
-| ``name_server.ip`` | list | Configures the name server IP | dellos9 |
-| ``name_server.vrf`` | list | Configures VRF for each IP | dellos9 |
-| ``name_server.state`` | string: absent,present\* | Deletes the name server IP if set to absent | dellos9 |
+| ``name_server.ip`` | list | Configures the name server IP | dellos9, dellos10 |
+| ``name_server.vrf`` | list | Configures VRF for each IP | dellos9, dellos10 |
+| ``name_server.state`` | string: absent,present\* | Deletes the name server IP if set to absent | dellos9, dellos10 |
 
-> **NOTE**: Asterisk (\*) denotes the default value if none is specified. 
+> **NOTE**: Asterisk (\*) denotes the default value if none is specified.
 
 Connection variables
 --------------------
