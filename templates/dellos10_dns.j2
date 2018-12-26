@@ -63,9 +63,7 @@ dellos_dns:
 			{% else %}
 				{% set ip_list = name_server.ip %}
 				{% if (ip_list is defined and ip_list ) %}
-					{% for ip_val in ip_list %}
-						{{ absent }}ip name-server {{ ip_val }}
-					{% endfor %}
+					{{ absent }}ip name-server {{ ip_list|join(' ') }}
 				{% endif %}
 			{% endif %}
 		{% endfor %}
@@ -92,9 +90,7 @@ dellos_dns:
 			{% else %}
 				{% set name_list = domain.name %}
 				{% if (name_list is defined and name_list ) %}
-					{% for name_val in name_list %}
-						{{ absent }}ip domain-list {{ name_val }}
-					{% endfor %}
+					{{ absent }}ip domain-list {{ name_list|join(' ') }}
 				{% endif %}
 			{% endif %}
 		{% endfor %}
