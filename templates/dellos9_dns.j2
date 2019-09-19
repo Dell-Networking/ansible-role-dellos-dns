@@ -1,9 +1,7 @@
 #jinja2: trim_blocks: True,lstrip_blocks: True
 {####################################
-
 Purpose:
 Configure DNS commands for dellos9 devices
-
 dellos_dns:
    domain_lookup: true
    name_server:
@@ -39,7 +37,6 @@ dellos_dns:
        vrf:
         - test
         - test1
-
 #####################################}
 {% if (dellos_dns is defined and dellos_dns) %}
 	{% if dellos_dns.domain_lookup is defined and dellos_dns.domain_lookup == true %}
