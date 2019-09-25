@@ -22,10 +22,12 @@ Role variables
 | Key        | Type                      | Description                                             | Support               |
 |------------|---------------------------|---------------------------------------------------------|-----------------------|
 | ``name_server`` | list | Configures DNS (see ``name_server.*``) | dellos9, dellos10 |
-| ``name_server.domain_lookup`` | boolean | Enables or disables domain name lookup   | dellos9 |
+| ``domain_name`` | boolean | Sets the DNS search domain   | dellos9 |
+| ``domain_lookup`` | boolean | Enables or disables domain name lookup   | dellos9 |
 | ``name_server.ip`` | list | Configures the name server IP | dellos9, dellos10 |
 | ``name_server.vrf`` | list | Configures VRF for each IP | dellos9, dellos10 |
 | ``name_server.state`` | string: absent,present\* | Deletes the name server IP if set to absent | dellos9, dellos10 |
+
 
 > **NOTE**: Asterisk (\*) denotes the default value if none is specified.
 
@@ -61,7 +63,7 @@ When *dellos_cfg_generate* is set to true, generates the configuration commands 
 
 **Sample hosts file**
 
-    leaf1 ansible_host= <ip_address> 
+    leaf1 ansible_host= <ip_address>
 
 **Sample host_vars/leaf1**
 
@@ -72,9 +74,10 @@ When *dellos_cfg_generate* is set to true, generates the configuration commands 
     ansible_ssh_user: xxxxx
     ansible_ssh_pass: xxxxx
     ansible_network_os: dellos9
-    build_dir: ../temp/dellos9	  
+    build_dir: ../temp/dellos9
 	dellos_dns:
 	   domain_lookup: true
+     dns_search: mydomain.com
 	   name_server:
 		 - ip:
 			- 1.1.1.1
