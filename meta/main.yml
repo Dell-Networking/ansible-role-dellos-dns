@@ -7,6 +7,7 @@ galaxy_info:
   min_ansible_version: 2.2
 
   platforms:
+<<<<<<< HEAD
   - name: dellos
 
   galaxy_tags:
@@ -18,3 +19,16 @@ galaxy_info:
     - dellos10
     - dellos9
     - dellos6
+=======
+  - name: DellOS
+
+  galaxy_tags:
+    - Networking
+    - Dell 
+    - EMC
+    - OS9
+    - DellEMC
+    - dellos10
+    - dellos9
+    - dellos6    
+>>>>>>> Improve content score
