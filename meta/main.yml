@@ -23,12 +23,16 @@ galaxy_info:
   - name: DellOS
 
   galaxy_tags:
-    - Networking
-    - Dell 
-    - EMC
-    - OS9
-    - DellEMC
+    - networking
+    - dell 
+    - emc
+    - os9
+    - dellemc
     - dellos10
     - dellos9
+<<<<<<< HEAD
     - dellos6    
+>>>>>>> Improve content score
+=======
+    - dellos6
 >>>>>>> Improve content score
