@@ -1,9 +1,7 @@
 #jinja2: trim_blocks: True,lstrip_blocks: True
 {####################################
-
 Purpose:
 Configure DNS commands for dellos10 devices
-
 dellos_dns:
    name_server:
      - ip:
@@ -38,7 +36,6 @@ dellos_dns:
        vrf:
         - test
         - test1
-
 #####################################}
 {% if (dellos_dns is defined and dellos_dns) %}
 	{% if (dellos_dns.name_server is defined and dellos_dns.name_server) %}

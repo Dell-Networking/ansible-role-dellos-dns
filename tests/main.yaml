@@ -1,6 +1,5 @@
 ---
 # vars file for Dell-Networking.dellos-dns, below gives a sample configuration
-
 # Sample variables for dellos9 device
 dellos_dns:
    domain_lookup: true
